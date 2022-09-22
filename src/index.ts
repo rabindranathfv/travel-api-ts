@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import expressStatusMonitor from 'express-status-monitor'
+import displayRoutes from 'express-routemap'
 
 import travelRouter from './routes/travel'
 import { configStatusMonitor } from './monitor/configStatusMonitor'
@@ -22,5 +23,6 @@ app.get('/alive', (_req, res) => {
 })
 
 app.listen(PORT, () => {
+  displayRoutes(app)
   console.log(`Running services in ${PORT}, Welcome`)
 })
