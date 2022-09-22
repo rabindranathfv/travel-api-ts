@@ -4,11 +4,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const daries_1 = __importDefault(require("./routes/daries"));
+const cors_1 = __importDefault(require("cors"));
+const helmet_1 = __importDefault(require("helmet"));
+const travel_1 = __importDefault(require("./routes/travel"));
 const app = (0, express_1.default)();
 const PORT = 3000;
 app.use(express_1.default.json());
-app.use('/api/v1/dairies', daries_1.default);
+app.use((0, cors_1.default)());
+app.use((0, helmet_1.default)());
+app.use('/api/v1/travel', travel_1.default);
 app.get('/alive', (_req, res) => {
     console.log('API ALIVE YESS****');
     res.send('up and running');

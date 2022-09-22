@@ -1,5 +1,5 @@
 import { request, response } from 'express'
-import { addTravel, getTravelsWithNoSenstiveInfo, getTravels, getTravelById } from '../services/dariesService'
+import { addTravel, getTravelsWithNoSenstiveInfo, getTravels, getTravelById } from '../services/travelService'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const getAllEntriesCtrl = (_req: typeof request, res: typeof response) => {
