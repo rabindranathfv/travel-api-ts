@@ -1,13 +1,13 @@
 export type Weather = 'sunny' | 'rainy' | 'cloudy' | 'windy' | 'stormy'
-export type Visibility = 'great' | 'good' | 'poor' | 'ok'
+export type Season = 'winter' | 'summer' | 'fall' | 'spring'
 
-export interface DairyEntry {
+export interface TravelEntry {
   id: number
   date: string
   weather: Weather
-  visibility: Visibility
+  season: Season
+  amountPeople: string
   comment: string
 }
 
-// export type DairyEntriesWithNoSenstiveInfo = Pick<DairyEntry, 'id' | 'date' | 'weather' | 'visibility' >
-export type DairyEntriesWithNoSenstiveInfo = Omit<DairyEntry, 'comment'>
+export type TravelEntriesWithSpecificInfo = Omit<TravelEntry, 'comment' | 'amountPeople'>

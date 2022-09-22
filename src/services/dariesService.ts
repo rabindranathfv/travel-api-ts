@@ -1,25 +1,25 @@
 import { Request, Response } from 'express'
 
-import dariesData from './daries.json'
-import { DairyEntry, DairyEntriesWithNoSenstiveInfo } from '../types'
+import travelsData from './travels.json'
+import { TravelEntry, TravelEntriesWithSpecificInfo } from '../types'
 
-const dariesEntries: DairyEntry[] = dariesData as DairyEntry[]
+const travelEntries: TravelEntry[] = travelsData as Array<TravelEntry>
 
-export const getEntries = (): DairyEntry[] => dariesEntries
+export const getTravels = (): TravelEntry[] => travelEntries
 
-export const getEntriesWithNoSenstiveInfo = (): DairyEntriesWithNoSenstiveInfo[] => {
-  return dariesEntries.map(({ id, weather, visibility, date }: DairyEntriesWithNoSenstiveInfo) => {
+export const getTravelsWithNoSenstiveInfo = (): TravelEntriesWithSpecificInfo[] => {
+  return travelEntries.map(({ id, weather, season, date }: TravelEntriesWithSpecificInfo) => {
     return {
       id,
       date,
       weather,
-      visibility
+      season
     }
   })
 }
 
-export const getEntryById = (_req: Request, res: Response, id: number): Response<DairyEntry | undefined, any> => {
-  const dairyById = dariesEntries.find(d => d.id === id)
+export const getTravelById = (_req: Request, res: Response, id: number): Response<TravelEntry | undefined, any> => {
+  const dairyById = travelEntries.find(d => d.id === id)
   if (dairyById !== undefined) {
     return res.json({
       ok: true,
@@ -34,20 +34,21 @@ export const getEntryById = (_req: Request, res: Response, id: number): Response
   })
 }
 
-export const addEntry = (_req: Request, res: Response, { comment, date, weather, visibility }: DairyEntry): Response<DairyEntry, any> => {
-  const newDairyEntry = {
-    id: dariesEntries.length + 1,
+export const addTravel = (_req: Request, res: Response, { comment, date, weather, season, amountPeople }: TravelEntry): Response<TravelEntry, any> => {
+  const newTravelEntry = {
+    id: travelEntries.length + 1,
     date,
     weather,
-    visibility,
+    season,
+    amountPeople,
     comment
   }
 
-  dariesEntries.push(newDairyEntry)
+  travelEntries.push(newTravelEntry)
 
   return res.json({
     ok: true,
-    msg: 'new dairy entry created sucessfully',
-    dairy: { ...newDairyEntry }
+    msg: 'new travel register succesfully created sucessfully',
+    travel: { ...newTravelEntry }
   })
 }
