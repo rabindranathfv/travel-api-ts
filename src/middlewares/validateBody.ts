@@ -14,7 +14,6 @@ export const schemaTravel = object({
 
 export const validateBody = (schema: AnySchema) => async (req: Request, res: Response, next: NextFunction): Promise<any> => {
   try {
-    console.log('BODY***', req.body)
     await schema.validate({
       body: req.body
     })

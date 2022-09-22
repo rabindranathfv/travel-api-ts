@@ -1,12 +1,15 @@
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
+import expressStatusMonitor from 'express-status-monitor'
 
 import travelRouter from './routes/travel'
+import { configStatusMonitor } from './monitor/configStatusMonitor'
 
 const app = express()
 const PORT = 3000
 
+app.use(expressStatusMonitor(configStatusMonitor))
 app.use(express.json())
 app.use(cors())
 app.use(helmet())
