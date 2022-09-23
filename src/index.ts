@@ -12,7 +12,12 @@ const PORT = 3000
 
 app.use(expressStatusMonitor(configStatusMonitor))
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  allowedHeaders: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+  origin: '*'
+}))
 app.use(helmet())
 
 app.use('/api/v1/travel', travelRouter)
